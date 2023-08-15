@@ -85,3 +85,142 @@ class API_Piggy():
         }
 
         response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()
+
+    def pig_data(self,userid, stall_id):
+        url = "https://api-piggy.codedefeat.com/v28/api/users/userinfo/farm/refresh/"
+        data = {
+            'userid': userid,
+            'stall_id': stall_id,
+        }
+
+        response = requests.post(url, headers=self.headers(), data=data)
+
+        return response.json()#['users_pigs']
+
+    def farm_load(self,userid,stall_id):
+        data = {
+            "userid": userid,
+            "stall_id": stall_id
+        }
+
+        url = "https://api-piggy.codedefeat.com/v29/api/users/userinfo/farm/load/"
+
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()
+
+    def steal(self, userid, pig_id):
+        url = 'https://api-piggy.codedefeat.com/v29/api/users/pigs/steal/confirm/'
+        data = {
+            'userid': userid,
+            'pigid': pig_id,
+        }
+
+        response = requests.post(url, headers=self.headers(), data=data)
+
+        return response.json()
+
+    def chack_steal(self, userid, pig_id):
+        url = 'https://api-piggy.codedefeat.com/v29/api/users/pigs/steal/check/'
+        data = {
+            'userid': userid,
+            'stall_id': pig_id,
+        }
+
+        response = requests.post(url,headers=self.headers(), data=data)
+        return response.json()
+
+    def add_friend(self,userid):
+        data = {
+            "userid": userid
+        }
+
+        url = "https://api-piggy.codedefeat.com/v29/api/users/friends/request/send/"
+
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()
+
+    def search_friends(self,text):
+        data = {
+            "text": text
+        }
+
+        url = "https://api-piggy.codedefeat.com/v29/api/users/friends/search/"
+
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()
+
+    def stall_count(self,userid,stall_id):
+        url = "https://api-piggy.codedefeat.com/v29/api/users/userinfo/farm/load/"
+        data = {
+            "userid": userid,
+            "stall_id": stall_id
+        }
+
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()['users_buildings']['stall_count']
+
+    def craftitems(self,craft_id,craft_amount):
+        url = "https://api-piggy.codedefeat.com/v29/api/users/craftitems/pigs/accept/"
+        data = {
+            "craft_id": craft_id,
+            "craft_amount": craft_amount
+        }
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()
+
+    def friends_lists(self):
+        url = "https://api-piggy.codedefeat.com/v29/api/users/friends/lists/"
+        data = {
+            "search_text": ""
+        }
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()['friends_lists']
+
+    def poison(self,userid,stall_id,item_id):
+        data = {
+            "userid": str(userid),
+            "stall_id": str(stall_id),
+            "item_id": str(item_id)
+        }
+
+        url = "https://api-piggy.codedefeat.com/v29/api/users/pigs/poison/confirm/"
+
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()
+
+    def check_poison(self, userid):
+        url = "https://api-piggy.codedefeat.com/v29/api/users/pigs/poison/check/"
+        data = {
+            "userid": userid
+        }
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()
+
+    def send_gift(self, user_id, pig_gifts):
+        url = "https://api-piggy.codedefeat.com/v29/api/users/gifts/send/accept/"
+        data = {
+            "userid": user_id,
+            "pig_lists": json.dumps({"pigid": pig_gifts})
+        }
+        print(data)
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()
+
+    def delete_friend(self, user_id):
+        url = "https://api-piggy.codedefeat.com/v29/api/users/friends/delete/"
+        data = {
+            "userid": user_id
+        }
+
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()
+
+    def open_box(self,box_id):
+        url = "https://api-piggy.codedefeat.com/v29/api/users/backpack/category/box/use/"
+        data = {
+            "box_id": box_id
+        }
+
+        response = requests.post(url, headers=self.headers(), data=data)
+        return response.json()
